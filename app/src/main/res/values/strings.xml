@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="软件">移动应用</string>
+    <string name="登录成功">登录成功</string>
+</resources>
