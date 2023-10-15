@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- This nested LinearLayout holds the avatar and the message details -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- ImageView for the Avatar/Profile Picture -->
+        <ImageView
+            android:id="@+id/avatarImageView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_man_24"
+            android:layout_marginEnd="16dp" />
+
+        <!-- This nested LinearLayout holds the Contact's Name and Last Message -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- TextView for the Contact's Name -->
+            <TextView
+                android:id="@+id/contactNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="John"
+                android:textStyle="bold" />
+
+            <!-- TextView for the Last Message -->
+            <TextView
+                android:id="@+id/lastMessageTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last message content here..." />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- ImageView for the Avatar/Profile Picture -->
+        <ImageView
+            android:id="@+id/avatarImageView1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_woman_24"
+            android:layout_marginEnd="16dp" />
+
+        <!-- This nested LinearLayout holds the Contact's Name and Last Message -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- TextView for the Contact's Name -->
+            <TextView
+                android:id="@+id/contactNameTextView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Marry"
+                android:textStyle="bold" />
+
+            <!-- TextView for the Last Message -->
+            <TextView
+                android:id="@+id/lastMessageTextView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last message content here..." />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
