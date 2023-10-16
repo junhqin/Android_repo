@@ -64,20 +64,22 @@ public class anotherActivity extends AppCompatActivity {
         mbottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch ( item.getItemId()) {
-                    case R.id.menu_chat:
-                        mViewPager.setCurrentItem(0);
-                        break;
-                    case R.id.menu_find:
-                        mViewPager.setCurrentItem(1);
-                        break;
-                    case R.id.menu_mine:
-                        mViewPager.setCurrentItem(2);
-                        break;
-                    default:
-                        break;
+                if( item.getItemId()==R.id.menu_chat){
+                    mViewPager.setCurrentItem(0);
                 }
+
+                else if (item.getItemId()==R.id.menu_find)
+                {
+                    mViewPager.setCurrentItem(1);
+                }
+
+                else if (R.id.menu_mine== item.getItemId()) {
+                    mViewPager.setCurrentItem(2);
+                }
+
+
                 return true;
+
             }
         });
     }
