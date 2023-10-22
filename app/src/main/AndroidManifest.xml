@@ -13,23 +13,24 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
 
+
+        <activity
+            android:name="com.example.findlist.TodolistActivity"
+            android:exported="false" />
         <activity
             android:name=".DialogActivity"
             android:exported="true"
             android:label="计算结果"
-            android:theme="@style/Theme.AppCompat.Dialog">
-        </activity>
-
-
+            android:theme="@style/Theme.AppCompat.Dialog" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".anotherActivity"
             android:exported="true"
@@ -40,7 +41,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".calculateActivity"
             android:exported="true"
@@ -49,8 +49,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-
+        <activity
+            android:name="com.example.findlist.GuessActivity"
+            android:label="猜拳游戏"
+            android:parentActivityName=".anotherActivity" />
     </application>
 
 </manifest>

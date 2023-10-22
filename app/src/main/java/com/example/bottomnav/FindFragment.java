@@ -1,23 +1,20 @@
 package com.example.bottomnav;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.R.layout;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
-import com.example.findlist.GuessGameFragment;
-import com.example.findlist.TodoListFragment;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.example.findlist.GuessActivity;
+import com.example.findlist.TodolistActivity;
 import com.example.myapplication.R;
 
 import java.util.ArrayList;
@@ -32,15 +29,26 @@ public class FindFragment extends Fragment {
     private SimpleAdapter mlistAdapter;
 
     private int[] imgs = {
-            R.drawable.ic_launcher_background
+            R.drawable.tom,
+            R.drawable.todo
     };
 
     private String[] titles = {
-            "猜拳游戏","TODO 清单",""
+            "猜拳游戏","TODO 清单"
     };
 
     private String[] descriptions = {
-            "描述1","描述2"
+            "任务要求 采用相对布局设计一个两人猜拳游戏的UI界面。"+
+                    "玩家选择RadioButton后显示出玩家选择的结果。 点击确定按钮后输出游戏结果。",
+            "本次实验的目的是使用DatePicker/Dialog（或者第三方日期控件）和ListView/ RecyclerView实现一个TODO 清单小功能。 \n" +
+                    "\n" +
+                    "\n" +
+                    "\n" +
+                    "任务要求 \n" +
+                    "\n" +
+                    "页面构成：添加待办事项按钮，事项输入，日期输入，TODO列表 \n" +
+                    "\n" +
+                    "功能要求： 通过添加按钮将事项/日期组成一个待办事项条目并添加到下方的列表里。 列表每一项都有一个完成按键,点击之后使用对话框提醒是否删除，确认则将该事项从列表中删除。 所有事项按时间排序。 日期采用DatePicker或者第三方日期选择。 TODO列表使用ListView或者RecyclerView实现。"
     };
 
     @Override
@@ -72,27 +80,25 @@ public class FindFragment extends Fragment {
         mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Fragment fragment;
+                Intent intent;
                 switch (position) {
                     case 0:
-                        fragment = new GuessGameFragment();
+                        intent = new Intent(getActivity(), GuessActivity.class);
+                        startActivity(intent);
                         break;
                     case 1:
-                        fragment = new TodoListFragment();
+                        intent = new Intent(getActivity(), TodolistActivity.class);
+                        startActivity(intent);
                         break;
                     default:
                         Toast.makeText(getContext(), "功能尚未实现", Toast.LENGTH_SHORT).show();
-                        return;
+                        break;
                 }
 
-                // 切换Fragment
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container, fragment)  // 注意: 'fragment_container' 是您的FrameLayout的ID，您可能需要根据自己的ID进行修改
-                        .addToBackStack(null)  // 如果您想允许用户通过返回按钮返回到上一个Fragment，添加这一行
-                        .commit();
             }
         });
+
+
 
 
 

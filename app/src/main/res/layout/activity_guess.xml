@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="猜拳游戏" />
+
+    <ImageView
+        android:id="@+id/Tom"
+        android:layout_width="92dp"
+        android:layout_height="95dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="150dp"
+        app:srcCompat="@drawable/tom" />
+
+    <RadioGroup
+        android:id="@+id/choices"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/Tom"
+        android:layout_toEndOf="@+id/Tom"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="石头" />
+
+        <RadioButton
+            android:id="@+id/scissors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="剪刀" />
+
+        <RadioButton
+            android:id="@+id/paper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="布" />
+
+    </RadioGroup>
+
+
+    <ImageView
+        android:id="@+id/jerry"
+        android:layout_width="92dp"
+        android:layout_height="95dp"
+        android:layout_below="@+id/Tom"
+        android:layout_alignStart="@+id/Tom"
+        android:layout_marginTop="40dp"
+        app:srcCompat="@drawable/jerry" />
+    <RadioGroup
+        android:id="@+id/choices2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/jerry"
+        android:layout_toEndOf="@+id/jerry"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rock2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="石头" />
+
+        <RadioButton
+            android:id="@+id/scissors2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="剪刀" />
+
+        <RadioButton
+            android:id="@+id/paper2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="布" />
+
+    </RadioGroup>
+    <Button
+        android:id="@+id/confirmButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="确定"
+        android:layout_below="@+id/choices2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp" />
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/confirmButton"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"
+        android:text="游戏结果将显示在这里"
+        android:textSize="18sp"
+        android:padding="10dp"
+        android:background="#f1f1f1"/>
+
+</RelativeLayout>

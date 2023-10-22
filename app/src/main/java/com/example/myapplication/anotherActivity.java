@@ -1,24 +1,20 @@
 package com.example.myapplication;
 
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.example.bottomnav.ChatFragment;
 import com.example.bottomnav.FindFragment;
 import com.example.bottomnav.MineFragment;
+
 import com.example.fragment_static.viewpager_test.adpater.MyFragmentStateVpAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,14 +32,14 @@ public class anotherActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_another);
-        Log.d("qjh", "pass2");
+
         mViewPager = findViewById(R.id.vp);
         mbottomNavigationView = findViewById(R.id.bottom_menu);
         initData();
 
         mStateVpAdapter = new MyFragmentStateVpAdapter(getSupportFragmentManager(), mFragmentList);
         mViewPager.setAdapter(mStateVpAdapter);
-        Log.d("qjh", "pass1");
+
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -106,5 +102,6 @@ public class anotherActivity extends AppCompatActivity {
         mFragmentList.add(new ChatFragment());
         mFragmentList.add(new FindFragment());
         mFragmentList.add(new MineFragment());
+
     };
 }
