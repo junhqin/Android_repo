@@ -65,6 +65,12 @@ public class GuessActivity extends AppCompatActivity {
          else if (choice1.equals("石头") && choice2.equals("剪刀")) {
              return "Tom获胜";
          }
+         else if (choice1.equals("布") && choice2.equals("剪刀")) {
+             return "Jerry获胜";
+         }
+         else if (choice1.equals("布") && choice2.equals("石头")) {
+             return "Tom获胜";
+         }
 
 
         // 默认情况下，平局

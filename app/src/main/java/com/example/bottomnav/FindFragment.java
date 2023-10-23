@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.findlist.GuessActivity;
+import com.example.findlist.Homework3_3Activity;
 import com.example.findlist.TodolistActivity;
 import com.example.myapplication.R;
 
@@ -30,11 +31,12 @@ public class FindFragment extends Fragment {
 
     private int[] imgs = {
             R.drawable.tom,
-            R.drawable.todo
+            R.drawable.todo,
+            R.drawable.jerry
     };
 
     private String[] titles = {
-            "猜拳游戏","TODO 清单"
+            "猜拳游戏","TODO 清单","menu，alertDialog和notification的使用。"
     };
 
     private String[] descriptions = {
@@ -48,7 +50,10 @@ public class FindFragment extends Fragment {
                     "\n" +
                     "页面构成：添加待办事项按钮，事项输入，日期输入，TODO列表 \n" +
                     "\n" +
-                    "功能要求： 通过添加按钮将事项/日期组成一个待办事项条目并添加到下方的列表里。 列表每一项都有一个完成按键,点击之后使用对话框提醒是否删除，确认则将该事项从列表中删除。 所有事项按时间排序。 日期采用DatePicker或者第三方日期选择。 TODO列表使用ListView或者RecyclerView实现。"
+                    "功能要求： 通过添加按钮将事项/日期组成一个待办事项条目并添加到下方的列表里。 列表每一项都有一个完成按键,点击之后使用对话框提醒是否删除，确认则将该事项从列表中删除。 所有事项按时间排序。 日期采用DatePicker或者第三方日期选择。 TODO列表使用ListView或者RecyclerView实现。",
+            "使用选项菜单，点击文字出现菜单\n" +
+                    "\n" +
+                    "分别点击不同的菜单，分别得到alertDialog 和notification的效果",
     };
 
     @Override
@@ -88,6 +93,10 @@ public class FindFragment extends Fragment {
                         break;
                     case 1:
                         intent = new Intent(getActivity(), TodolistActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 2:
+                        intent = new Intent(getActivity(), Homework3_3Activity.class);
                         startActivity(intent);
                         break;
                     default:
