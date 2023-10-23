@@ -3,15 +3,18 @@ package com.example.findlist;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -69,7 +72,34 @@ public class TodolistActivity extends AppCompatActivity {
         mList = new ArrayList<>();
 
         taskListAdapter = new SimpleAdapter(this, mList, R.layout.todo_item,
-                new String[]{"title", "date"},new int[]{R.id.tv_title, R.id.tv_date});
+                new String[]{"title", "date"},new int[]{R.id.tv_title, R.id.tv_date}){
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                final View view = super.getView(position, convertView, parent);
+                Button useBtn = (Button) view.findViewById(R.id.Completebutton);
+                final  AlertDialog.Builder builder = new AlertDialog.Builder(TodolistActivity.this);
+                useBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        new AlertDialog.Builder(TodolistActivity.this)
+                                .setTitle("删除任务")
+                                .setMessage("您确定要删除这个任务吗？")
+                                .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        mList.remove(position);
+                                        notifyDataSetChanged();
+                                        Toast.makeText(TodolistActivity.this, "Task deleted", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .setNegativeButton("取消", null)
+                                .show();
+                    }
+                });
+                return view;
+            }
+        };
+
 
 
 
@@ -89,16 +119,16 @@ public class TodolistActivity extends AppCompatActivity {
             }
         });
 
-        taskListView.setAdapter(taskListAdapter);
-        taskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        taskListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                mList.remove(i);
-                taskListAdapter.notifyDataSetChanged();
-                Toast.makeText(TodolistActivity.this, "Task deleted", Toast.LENGTH_SHORT).show();
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Toast.makeText(TodolistActivity.this, "Long Pressed on position: " + position, Toast.LENGTH_SHORT).show();
+                return true; // 表示长按已被处理
             }
         });
 
+        taskListView.setAdapter(taskListAdapter);
     }
 
     @Override

@@ -28,7 +28,7 @@
         />
 
     <Button
-        android:id="@+id/buttonAddTask"
+        android:id="@+id/Completebutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -40,5 +40,7 @@
         android:layout_marginBottom="16dp"
         android:layout_toEndOf="@+id/tv_date"
         android:layout_toRightOf="@id/tv_title"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:text="完成" />
 </RelativeLayout>
