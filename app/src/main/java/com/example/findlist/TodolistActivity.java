@@ -3,15 +3,23 @@ package com.example.findlist;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,10 +50,14 @@ public class TodolistActivity extends AppCompatActivity {
     private EditText editTextTask;
     private int m_year,m_month,m_day;
     private Map<String, Object> map;
+    private NotificationManager mNotification;
+    private Notification notification ;
+    private int ID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ID =1;
         super.onCreate(savedInstanceState);
-       setContentView(R.layout.activity_todolist);
+        setContentView(R.layout.activity_todolist);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // 显示返回键
@@ -59,6 +71,21 @@ public class TodolistActivity extends AppCompatActivity {
         m_day = c.get(Calendar.DAY_OF_MONTH);
         map = new HashMap<>();
         textView.setText(m_year+"年"+(m_month+1)+"月"+m_day+"日");
+        mNotification = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+        if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel("default","通知1",NotificationManager.IMPORTANCE_HIGH);
+            mNotification.createNotificationChannel(channel);
+            notification = new Notification.Builder(this, "default")
+                    .setContentTitle("待办事项")
+                    .setContentText("记得完成待办事项")
+                    .setWhen(System.currentTimeMillis())
+                    .setSmallIcon(R.drawable.checklist_24)
+                    .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.checklist_24))
+                    .build();
+
+
+        }
+
 
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +97,7 @@ public class TodolistActivity extends AppCompatActivity {
         addButton = findViewById(R.id.buttonAddTask);
         taskListView = findViewById(R.id.taskList);
         mList = new ArrayList<>();
+        this.registerForContextMenu(taskListView);
 
         taskListAdapter = new SimpleAdapter(this, mList, R.layout.todo_item,
                 new String[]{"title", "date"},new int[]{R.id.tv_title, R.id.tv_date}){
@@ -120,15 +148,50 @@ public class TodolistActivity extends AppCompatActivity {
         });
 
 
-        taskListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Toast.makeText(TodolistActivity.this, "Long Pressed on position: " + position, Toast.LENGTH_SHORT).show();
-                return true; // 表示长按已被处理
-            }
-        });
+
 
         taskListView.setAdapter(taskListAdapter);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int position = info.position; //获取被长按的项的位置
+        Map<String, Object> selectedItem = mList.get(position);
+        String title = (String) selectedItem.get("title");
+        String date = (String) selectedItem.get("date");
+        String itemInfo = "Title: " + title + "\nDate: " + date;  // 构建表示所选项信息的字符串
+        switch (item.getItemId()) {
+            case R.id.alertDialog:
+                new AlertDialog.Builder(TodolistActivity.this)
+                        .setTitle("任务详情页")
+                        .setMessage(itemInfo)
+                        .setPositiveButton("确认", null)
+                        .show();
+                return true;
+            case R.id.notification:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    notification = new Notification.Builder(this, "default")
+                            .setContentTitle("待办事项: " + title)  // 使用选择的任务标题
+                            .setContentText("记得在" + date+"前完成")  // 使用选择的任务日期
+                            .setWhen(System.currentTimeMillis())
+                            .setSmallIcon(R.drawable.checklist_24)
+                            .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.checklist_24))
+                            .build();
+                    mNotification.notify(++ID, notification);
+                }
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
+
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getMenuInflater().inflate(R.menu.task_menu, menu);
     }
 
     @Override

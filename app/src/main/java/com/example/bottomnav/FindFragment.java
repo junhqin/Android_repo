@@ -32,11 +32,13 @@ public class FindFragment extends Fragment {
     private int[] imgs = {
             R.drawable.tom,
             R.drawable.todo,
-            R.drawable.jerry
+            R.drawable.video,
+            R.drawable.battery
     };
 
     private String[] titles = {
-            "猜拳游戏","TODO 清单","menu，alertDialog和notification的使用。"
+            "猜拳游戏","TODO 清单","用Service实现简单音乐播放器",
+            "用BroadcastReceiver实时监听电量"
     };
 
     private String[] descriptions = {
@@ -51,9 +53,9 @@ public class FindFragment extends Fragment {
                     "页面构成：添加待办事项按钮，事项输入，日期输入，TODO列表 \n" +
                     "\n" +
                     "功能要求： 通过添加按钮将事项/日期组成一个待办事项条目并添加到下方的列表里。 列表每一项都有一个完成按键,点击之后使用对话框提醒是否删除，确认则将该事项从列表中删除。 所有事项按时间排序。 日期采用DatePicker或者第三方日期选择。 TODO列表使用ListView或者RecyclerView实现。",
-            "使用选项菜单，点击文字出现菜单\n" +
-                    "\n" +
-                    "分别点击不同的菜单，分别得到alertDialog 和notification的效果",
+                    "本次实验的目的是让读者熟悉service组件的使用。使用Service的典型的例子是，用户一边在手机上操作其他应用程序，一边在手机上听音乐。而播放音乐就可以使用Service组件在后台来实现。",
+                    "任务描述：本次实验的目的是通过BroadcastReceiver组件实现手机电量的实时监控。掌握Con-text.registerReceiver（）方法进行动态注册，通过<Receiver>标签在androidmanifest . xml进行注册。"
+
     };
 
     @Override
