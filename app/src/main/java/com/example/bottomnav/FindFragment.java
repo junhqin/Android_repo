@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.findlist.GuessActivity;
-import com.example.findlist.Homework3_3Activity;
+import com.example.findlist.MusicPlayerActivity;
 import com.example.findlist.TodolistActivity;
 import com.example.myapplication.R;
 
@@ -98,7 +98,7 @@ public class FindFragment extends Fragment {
                         startActivity(intent);
                         break;
                     case 2:
-                        intent = new Intent(getActivity(), Homework3_3Activity.class);
+                        intent = new Intent(getActivity(), MusicPlayerActivity.class);
                         startActivity(intent);
                         break;
                     default:
