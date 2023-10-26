@@ -5,11 +5,17 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.example.myapplication.R;
 
 public class MusicPlayerActivity extends AppCompatActivity {
-
+    private ImageView iv_disk;
+    private SeekBar sb;//进度条
+    private TextView curTime;
+    private TextView totalTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
