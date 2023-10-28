@@ -1,18 +1,12 @@
 package com.example.findlist;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
-
 import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.BitmapFactory;
@@ -31,6 +25,9 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.myapplication.R;
 
@@ -82,8 +79,6 @@ public class TodolistActivity extends AppCompatActivity {
                     .setSmallIcon(R.drawable.checklist_24)
                     .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.checklist_24))
                     .build();
-
-
         }
 
 
@@ -129,8 +124,6 @@ public class TodolistActivity extends AppCompatActivity {
         };
 
 
-
-
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -146,10 +139,6 @@ public class TodolistActivity extends AppCompatActivity {
                 taskListAdapter.notifyDataSetChanged();
             }
         });
-
-
-
-
         taskListView.setAdapter(taskListAdapter);
     }
 
