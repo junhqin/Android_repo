@@ -16,10 +16,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
+        <receiver
+            android:name="com.example.findlist.MyReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+        <receiver
+            android:name="com.example.findlist.BatteryReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name="com.example.findlist.BatteryActivity"
+            android:exported="true" />
+
         <service
             android:name="com.example.service.MediaPlayerService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
         <activity
             android:name="com.example.findlist.MusicPlayerActivity"

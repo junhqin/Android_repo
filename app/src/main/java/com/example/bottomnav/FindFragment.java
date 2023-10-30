@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.findlist.BatteryActivity;
 import com.example.findlist.GuessActivity;
 import com.example.findlist.MusicPlayerActivity;
 import com.example.findlist.TodolistActivity;
@@ -99,6 +100,10 @@ public class FindFragment extends Fragment {
                         break;
                     case 2:
                         intent = new Intent(getActivity(), MusicPlayerActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 3:
+                        intent = new Intent(getActivity(), BatteryActivity.class);
                         startActivity(intent);
                         break;
                     default:
