@@ -77,6 +77,11 @@
             android:name="com.example.findlist.GuessActivity"
             android:label="猜拳游戏"
             android:parentActivityName=".anotherActivity" />
+        <activity
+            android:name="com.example.findlist.SharedPreferenceActivity"
+            android:label="使用SharedPreferences存储与读取数据"
+            android:exported="true"/>
+
     </application>
 
 </manifest>

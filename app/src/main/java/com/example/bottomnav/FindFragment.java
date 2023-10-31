@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.example.findlist.BatteryActivity;
 import com.example.findlist.GuessActivity;
 import com.example.findlist.MusicPlayerActivity;
+import com.example.findlist.SharedPreferenceActivity;
 import com.example.findlist.TodolistActivity;
 import com.example.myapplication.R;
 
@@ -39,7 +40,8 @@ public class FindFragment extends Fragment {
 
     private String[] titles = {
             "猜拳游戏","TODO 清单","用Service实现简单音乐播放器",
-            "用BroadcastReceiver实时监听电量"
+            "用BroadcastReceiver实时监听电量",
+            "使用SharedPreferences存储与读取数据"
     };
 
     private String[] descriptions = {
@@ -55,7 +57,14 @@ public class FindFragment extends Fragment {
                     "\n" +
                     "功能要求： 通过添加按钮将事项/日期组成一个待办事项条目并添加到下方的列表里。 列表每一项都有一个完成按键,点击之后使用对话框提醒是否删除，确认则将该事项从列表中删除。 所有事项按时间排序。 日期采用DatePicker或者第三方日期选择。 TODO列表使用ListView或者RecyclerView实现。",
                     "本次实验的目的是让读者熟悉service组件的使用。使用Service的典型的例子是，用户一边在手机上操作其他应用程序，一边在手机上听音乐。而播放音乐就可以使用Service组件在后台来实现。",
-                    "任务描述：本次实验的目的是通过BroadcastReceiver组件实现手机电量的实时监控。掌握Con-text.registerReceiver（）方法进行动态注册，通过<Receiver>标签在androidmanifest . xml进行注册。"
+                    "任务描述：本次实验的目的是通过BroadcastReceiver组件实现手机电量的实时监控。掌握Con-text.registerReceiver（）方法进行动态注册，通过<Receiver>标签在androidmanifest . xml进行注册。",
+                    "任务要求 \n" +
+                            "\n" +
+                            "创建SharedPreferencesTest项目，修改activity_main.xml中的代码，添加两个按钮1、2创建项目并熟悉文件目录结构，在项目文件夹下res下 \n" +
+                            "\n" +
+                            "点击按钮1完成存储3条不同类型的数据的操作 \n" +
+                            "\n" +
+                            "点击按钮2可以从SharedPreferences文件中读取数据，并通过Toast显示。"
 
     };
 
@@ -104,6 +113,10 @@ public class FindFragment extends Fragment {
                         break;
                     case 3:
                         intent = new Intent(getActivity(), BatteryActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 4:
+                        intent = new Intent(getActivity(), SharedPreferenceActivity.class);
                         startActivity(intent);
                         break;
                     default:
