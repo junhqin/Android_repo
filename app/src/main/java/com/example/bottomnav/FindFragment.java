@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.example.findlist.BatteryActivity;
 import com.example.findlist.GuessActivity;
 import com.example.findlist.MusicPlayerActivity;
+import com.example.findlist.SMSActivity;
 import com.example.findlist.SharedPreferenceActivity;
 import com.example.findlist.TodolistActivity;
 import com.example.myapplication.R;
@@ -41,7 +42,8 @@ public class FindFragment extends Fragment {
     private String[] titles = {
             "猜拳游戏","TODO 清单","用Service实现简单音乐播放器",
             "用BroadcastReceiver实时监听电量",
-            "使用SharedPreferences存储与读取数据"
+            "使用SharedPreferences存储与读取数据",
+            "Content Provider和运行时权限授予"
     };
 
     private String[] descriptions = {
@@ -64,7 +66,8 @@ public class FindFragment extends Fragment {
                             "\n" +
                             "点击按钮1完成存储3条不同类型的数据的操作 \n" +
                             "\n" +
-                            "点击按钮2可以从SharedPreferences文件中读取数据，并通过Toast显示。"
+                            "点击按钮2可以从SharedPreferences文件中读取数据，并通过Toast显示。",
+                    "创建GetSMS项目，在AndroidManifest中添加读取联系人的权限。"
 
     };
 
@@ -117,6 +120,10 @@ public class FindFragment extends Fragment {
                         break;
                     case 4:
                         intent = new Intent(getActivity(), SharedPreferenceActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 5:
+                        intent = new Intent(getActivity(), SMSActivity.class);
                         startActivity(intent);
                         break;
                     default:
