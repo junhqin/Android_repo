@@ -30,6 +30,12 @@
         android:layout_marginBottom="25dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="下面通过SharedPreferenece来保存数据"
+        android:layout_gravity="center_horizontal"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,4 +46,23 @@
         android:layout_height="wrap_content"
         android:text="RESTORE DATA"
         android:id="@+id/btn_restore"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="下面通过文件来保存数据"
+        android:layout_gravity="center_horizontal"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="File Save"
+        android:id="@+id/btn_fsave"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="File Delete"
+        android:id="@+id/btn_fdelete"/>
+
 </LinearLayout>
