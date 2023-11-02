@@ -9,6 +9,8 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
@@ -50,6 +52,7 @@ public class TodolistActivity extends AppCompatActivity {
     private NotificationManager mNotification;
     private Notification notification ;
     private int ID;
+    private SQLiteOpenHelper mydb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ID =1;
@@ -210,4 +213,11 @@ public class TodolistActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    public void SQLiteCreate(){
+
+        SQLiteDatabase db = mydb.getWritableDatabase();
+    }
+
+
 }

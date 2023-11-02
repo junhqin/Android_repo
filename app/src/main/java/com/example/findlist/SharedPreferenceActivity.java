@@ -1,10 +1,12 @@
 package com.example.findlist;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +24,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.nio.Buffer;
+import java.util.ArrayList;
+import java.util.List;
 
 //键值对进行传递
 public class SharedPreferenceActivity extends AppCompatActivity {
@@ -44,6 +49,7 @@ public class SharedPreferenceActivity extends AppCompatActivity {
         et_name = findViewById(R.id.et_name);
         btn_fdelete = findViewById(R.id.btn_fdelete);
         btn_fsave = findViewById(R.id.btn_fsave);
+        StringBuilder sb = new StringBuilder();
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,12 +65,38 @@ public class SharedPreferenceActivity extends AppCompatActivity {
         btn_fsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                fsave(view);
             }
         });
+        btn_fdelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferenceActivity.this.deleteFile("data ");
+                Toast.makeText(view.getContext(), "File Deleted", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+        try{
+            FileInputStream input = openFileInput("data");
+            bufferedReader = new BufferedReader(new InputStreamReader(input));
+            String line;
+            List <String> datalist = new ArrayList<>();
+            while((line = bufferedReader.readLine())!=null){
+                datalist.add(line);
+            }
+            et_name.setText(datalist.get(0));
+            et_age.setText(datalist.get(1));
+            et_married.setText(datalist.get(2));
+        } catch (IOException e) {
+            Toast.makeText(this, "File not found", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     public void save(View view) {
+        Log.d("12345","PASS");
         String name = et_name.getText().toString();
         String age = et_age.getText().toString();
         String married = et_married.getText().toString();
@@ -78,16 +110,24 @@ public class SharedPreferenceActivity extends AppCompatActivity {
 
     public void fsave(View view) {
         try {
-            FileOutputStream fsave = openFileOutput("data", MODE_PRIVATE);
+            FileOutputStream output = openFileOutput("data", MODE_PRIVATE);
 //            FileInputStream fsave = openFileInput("data");
-            bufferedReader = new BufferedReader(new InputStreamReader(fsave));
-            bufferedWriter = new BufferedWriter(new OutputStreamWriter())
+//            bufferedReader = new BufferedReader(new InputStreamReader(fsave));
+            bufferedWriter = new BufferedWriter(new OutputStreamWriter(output));
+            String name = et_name.getText().toString();
+            String age = et_age.getText().toString();
+            String married = et_married.getText().toString();
+            String result = name + "\n"+ age + "\n" + married;
+            bufferedWriter.write(result);
+            Toast.makeText(this, "Data saved to file", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             e.printStackTrace();
+
+            Toast.makeText(this, "Error saving data to file", Toast.LENGTH_SHORT).show();
         } finally {
-            if (bufferedReader != null) {
+            if (bufferedWriter != null) {
                 try {
-                    bufferedReader.close();
+                    bufferedWriter.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
