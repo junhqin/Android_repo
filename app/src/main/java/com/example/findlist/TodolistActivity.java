@@ -9,6 +9,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.BitmapFactory;
@@ -31,7 +32,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.findlist.bean.TODO;
 import com.example.myapplication.R;
+import com.google.android.material.transition.MaterialSharedAxis;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -52,7 +55,7 @@ public class TodolistActivity extends AppCompatActivity {
     private NotificationManager mNotification;
     private Notification notification ;
     private int ID;
-    private SQLiteOpenHelper mydb;
+    private MySqliteDB mydb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ID =1;
@@ -63,6 +66,7 @@ public class TodolistActivity extends AppCompatActivity {
         // 显示返回键
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        mydb = new MySqliteDB(this);
         textView = findViewById(R.id.date);
         editTextTask = findViewById(R.id.editTextTask);
         c = Calendar.getInstance();
@@ -113,7 +117,9 @@ public class TodolistActivity extends AppCompatActivity {
                                 .setPositiveButton("确认", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+                                        String taskId = (String) mList.get(position).get("id");
                                         mList.remove(position);
+                                        mydb.delete(taskId);
                                         notifyDataSetChanged();
                                         Toast.makeText(TodolistActivity.this, "Task deleted", Toast.LENGTH_SHORT).show();
                                     }
@@ -132,18 +138,40 @@ public class TodolistActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String date = textView.getText().toString();
                 String title = editTextTask.getText().toString();
-
-                Log.d("todoList", title + date);
-
-                Map<String, Object> newTaskMap = new HashMap<>();
-                newTaskMap.put("title", title);
-                newTaskMap.put("date", date);
-                mList.add(newTaskMap);
-                taskListAdapter.notifyDataSetChanged();
+                //数据类实例
+                TODO newTODO = new TODO();
+                newTODO.setDate(date);
+                newTODO.setContent(title);
+                mydb.insert(newTODO);
+//                无数据库版本代码
+//                Map<String, Object> newTaskMap = new HashMap<>();
+//                newTaskMap.put("title", title);
+//                newTaskMap.put("date", date);
+//                mList.add(newTaskMap);
+                show();
             }
         });
         taskListView.setAdapter(taskListAdapter);
+        show();
     }
+
+    //列表显示方法
+    public void show(){
+        SQLiteDatabase db = mydb.getReadableDatabase();
+        Cursor cursor = db.query("todos", new String[]{"id","content","date"}, null, null, null, null, "date");
+        mList.clear();
+        while(cursor.moveToNext()){
+            Map<String, Object> item = new HashMap<>();
+            item.put("id",cursor.getString(0));
+            item.put("title",cursor.getString(1));
+            item.put("date",cursor.getString(2));
+            mList.add(item);
+        }
+        taskListAdapter.notifyDataSetChanged();
+    }
+
+
+
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
@@ -214,10 +242,7 @@ public class TodolistActivity extends AppCompatActivity {
         }
     }
 
-    public void SQLiteCreate(){
 
-        SQLiteDatabase db = mydb.getWritableDatabase();
-    }
 
 
 }
